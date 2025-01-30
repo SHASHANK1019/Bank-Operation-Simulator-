@@ -1,0 +1,70 @@
+def bank_operations():
+    """Simulates a simple bank account."""
+
+    balance = 0  # Initial balance set to 0
+    initial_deposit_done = False  # Flag to check if the initial deposit has been made
+
+    while True:
+        print("\n--- Bank Account Operations ---")
+        print("1. Withdraw")
+        print("2. Deposit")
+        print("3. Check Balance")
+        print("4. Exit")
+
+        # If the initial deposit hasn't been made, prompt for it
+        if not initial_deposit_done:
+            try:
+                deposit_amount = int(input("You need to make an initial deposit. Enter deposit amount: "))
+                if deposit_amount <= 0:
+                    print("Invalid deposit amount. Please enter a positive integer.")
+                    continue  # Go back to the start of the loop
+                else:
+                    balance += deposit_amount
+                    initial_deposit_done = True  # Set the flag to True after the initial deposit
+                    print("Initial deposit successful. New balance:", balance)
+                    continue  # Go back to the start of the loop to show options
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+                continue  # Go back to the start of the loop
+
+        choice = input("Enter your choice (1/2/3/4): ")
+
+        if choice == '1':
+            try:
+                withdraw_amount = int(input("Enter withdrawal amount: "))
+                if withdraw_amount <= 0:
+                    print("Invalid withdrawal amount. Please enter a positive integer.")
+                    continue  # Go back to the start of the loop
+                elif withdraw_amount > balance:
+                    print("Insufficient funds.")
+                else:
+                    balance -= withdraw_amount
+                    print("Withdrawal successful. New balance:", balance)
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+
+        elif choice == '2':
+            try:
+                deposit_amount = int(input("Enter deposit amount: "))
+                if deposit_amount <= 0:
+                    print("Invalid deposit amount. Please enter a positive integer.")
+                    continue  # Go back to the start of the loop
+                else:
+                    balance += deposit_amount
+                    print("Deposit successful. New balance:", balance)
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+
+        elif choice == '3':
+            print("Current balance:", balance)
+
+        elif choice == '4':
+            print("Thank you for using the bank.")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    bank_operations()
